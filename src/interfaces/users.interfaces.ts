@@ -14,6 +14,11 @@ export interface IUserResponse {
     updatedAt: Date
 }
 
+export interface IUserLogin {
+    username: string
+    password: string
+}
+
 export const IUserKeys = {
     username: "string",
     password: "string",
