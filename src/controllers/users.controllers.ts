@@ -13,5 +13,5 @@ export const postUserController = async (request: Request, response: Response) =
 
 
 export const listUsersController = async (request: Request, response: Response) => {
-    return response.json("DALE")
+    return response.json("teste")
 }

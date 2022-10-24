@@ -1,6 +1,6 @@
 import { IUserKeys } from "../interfaces/users.interfaces";
 import { User } from "../entities/user.entity";
-import { postGeneric, validateDataToCreate } from "../utils/create";
+import { postGeneric, validateDataToCreate } from "../utils/createGenerics";
 
 
 export const postUserService = async (data: any, isAdm: boolean) => {
