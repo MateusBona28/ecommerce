@@ -79,6 +79,22 @@ const validateInstanceKeys = (instance: any, instanceToValidate: any) => {
 }
 
 
+export const objectAlreadyExists = async (model: any, instanceKey: any, instanceKeyValue: any) => {
+
+    const modelRepository = AppDataSource.getRepository(model)
+
+    const instances = await modelRepository.find()
+
+    const instanceAlreadyExists = instances.find(object => object[`${instanceKey}`] === instanceKeyValue)
+
+    if (instanceAlreadyExists) {
+        throw new AppError(`${instanceKey} already exists`, 400);
+    }
+
+    return false
+}
+
+
 export const validateDataToCreate = async (instance: any, instanceToValidate: any) => {
 
     validateInstanceKeys(instance, instanceToValidate)
