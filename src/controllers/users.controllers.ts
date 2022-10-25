@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { postUserService } from "../services/users.services"
+import { listUsersService, postUserService } from "../services/users.services"
 
 
 export const postUserController = async (request: Request, response: Response) => {
@@ -13,5 +13,8 @@ export const postUserController = async (request: Request, response: Response) =
 
 
 export const listUsersController = async (request: Request, response: Response) => {
-    return response.json("teste")
+
+    const allUsers = await listUsersService()
+
+    return response.json(allUsers)
 }
