@@ -3,7 +3,7 @@ import AppError from "../errors/AppError"
 import { hash } from "bcryptjs";
 
 
-export const postGeneric = async (model: any, instance: any) => {
+export const postGeneric = async (model: any, instance: any, callback?: any) => {
 
     if (!instance.isValid) {
         throw new AppError("antes de criar um novo usuário, utilize a função validateDataToCreate => validateDataToCreate(instanceToValidate, IKeys) ", 400)
@@ -15,6 +15,10 @@ export const postGeneric = async (model: any, instance: any) => {
 
     modelRepository.create(instance)
     const data = await modelRepository.save(instance)
+
+    if (callback) {
+        callback(data)
+    }
 
     return data
 
@@ -95,7 +99,7 @@ export const objectAlreadyExists = async (model: any, instanceKey: any, instance
 }
 
 
-export const validateDataToCreate = async (instance: any, instanceToValidate: any) => {
+export const validateDataToCreate = async (instance: any, instanceToValidate: any, callback?: any) => {
 
     validateInstanceKeys(instance, instanceToValidate)
     validateInstanceTypes(instance, instanceToValidate)
@@ -103,6 +107,10 @@ export const validateDataToCreate = async (instance: any, instanceToValidate: an
     const hashedPassword = await hash(instance.password, 10)
 
     instance.password = hashedPassword
+
+    if (callback) {
+        callback(instance)
+    }
 
     return instance
 

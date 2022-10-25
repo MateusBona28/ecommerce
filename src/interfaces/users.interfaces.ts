@@ -10,6 +10,7 @@ export interface IUserResponse {
     id: string
     username: string
     isAdm: boolean
+    password?: string
     createdAt: Date
     updatedAt: Date
 }
