@@ -20,6 +20,21 @@ export const getByIdGeneric = async (model: any, instanceId:any , callback?: any
 }
 
 
+export const getAllObjectsGeneric = async (model: any, callback?: Function) => {
+
+    const modelRepository = AppDataSource.getRepository(model)
+
+    const instances = await modelRepository.find()
+
+    if (callback) {
+        callback(instances)
+    }
+
+    return instances
+
+}
+
+
 export const getObjectOr404 = async (model: any, objectKey: any, objectKeyValue: any ) => {
 
     const modelRepository = AppDataSource.getRepository(model)
