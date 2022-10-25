@@ -5,7 +5,7 @@ const usersRoutes = Router()
 
 
 usersRoutes.post("", postUserController)
-//usersRoutes.get("", listUsersController)
+usersRoutes.get("", listUsersController)
 
 
 export default usersRoutes
