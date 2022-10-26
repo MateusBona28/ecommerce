@@ -35,7 +35,7 @@ export const getAllObjectsGeneric = async (model: any, callback?: Function) => {
 }
 
 
-export const getObjectOr404 = async (model: any, objectKey: any, objectKeyValue: any ) => {
+export const getObjectOr404 = async (model: any, objectKey: any, objectKeyValue: any , callback?: Function) => {
 
     const modelRepository = AppDataSource.getRepository(model)
 
@@ -49,6 +49,10 @@ export const getObjectOr404 = async (model: any, objectKey: any, objectKeyValue:
 
     if (!instance) {
         throw new AppError("Not found", 404);
+    }
+
+    if (callback) {
+        callback(instance)
     }
 
     return instance
