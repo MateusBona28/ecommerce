@@ -2,7 +2,7 @@ import { IUserKeys } from "../interfaces/users.interfaces";
 import { User } from "../entities/user.entity";
 import { objectAlreadyExists, postGeneric, validateDataToCreate } from "../utils/createGenerics";
 import { IUserResponse } from "../interfaces/users.interfaces"
-import { getAllObjectsGeneric } from "../utils/getGenerics";
+import { getAllObjectsGeneric, getObjectOr404 } from "../utils/getGenerics";
 
 
 export const postUserService = async (data: any, isAdm: boolean) => {
@@ -29,5 +29,16 @@ export const listUsersService = async () => {
     })
 
     return allUsers
+
+}
+
+
+export const listUserDetailService = async (userId: string) => {
+
+    const user = await getObjectOr404(User, "id", userId, (user: any) => {
+        delete user.password
+    })
+
+    return user
 
 }
